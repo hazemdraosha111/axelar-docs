@@ -7,6 +7,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { h, s } from "hastscript";
 import sitemap from "@astrojs/sitemap";
+import starlight from "@astrojs/starlight";
 const DEFAULT_LAYOUT = "/src/layouts/Section.astro";
 function setDefaultLayout() {
   return function (_, file) {
@@ -15,8 +16,31 @@ function setDefaultLayout() {
   };
 }
 
+// https://astro.build/config
 export default defineConfig({
-  integrations: [react(), mdx(), sitemap()],
+  integrations: [
+    react(),
+    mdx(),
+    sitemap({
+      title: "My Docs",
+      social: {
+        github: "https://github.com/withastro/starlight",
+      },
+      sidebar: [
+        {
+          label: "Guides",
+          items: [
+            // Each item here is one entry in the navigation menu.
+            { label: "Example Guide", link: "/guides/example/" },
+          ],
+        },
+        {
+          label: "Reference",
+          autogenerate: { directory: "reference" },
+        },
+      ],
+    }),
+  ],
   site: "https://docs.axelar.dev",
   markdown: {
     remarkPlugins: [
