@@ -12,9 +12,9 @@ const { description, image, hidden } = Astro.props.frontmatter || Astro.props;
 
 <MainLayout {...Astro.props}>
   <div id="page">
-    <div class="sideNav nomobile">
+    <aside class="sideNav nomobile">
       <Navigation />
-    </div>
+    </aside>
     <div class="mainBody">
       <article>
         <slot />
